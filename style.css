@@ -1,21 +1,91 @@
 /*
- * Full Custom CSS for Academy Hall Montessori Graduation Website
- * Updated for simplified Order of Service, consistent layout, and responsive design
+ * Academy Hall Montessori Graduation Website CSS
+ *
+ * This stylesheet provides the core styling for the graduation website,
+ * including responsive design, layout, and visual enhancements.
+ *
+ * Table of Contents:
+ * 1. General Styles & Utilities
+ * 2. Navigation Bar
+ * 3. Mobile Menu Overlay
+ * 4. Hero Section
+ * 5. About Ceremony Section
+ * 6. Graduands Section
+ * 7. Program Section
+ * 8. New Website Teaser Section
+ * 9. Contact / FAQ Section
+ * 10. Footer
+ * 11. Responsive Design / Media Queries
+ * 12. Animations
  */
 
-/* ======================== GENERAL STYLES ======================== */
+/* --- 1. General Styles & Utilities --- */
+:root {
+    /* Colors */
+    --primary-blue: #1d4ed8;
+    --dark-blue: #1e40af;
+    --light-blue: #bfdbfe;
+    --lighter-blue: #eff6ff;
+    --accent-yellow: #facc15;
+    --accent-green: #16a34a;
+    --text-dark: #333;
+    --text-medium: #4b5563;
+    --text-light: #9ca3af;
+    --background-light: #f8f8f8;
+    --background-white: #fff;
+    --border-light: #d1d5db;
+    --border-medium: #e5e7eb;
+
+    /* Spacing */
+    --padding-sm: 1rem;
+    --padding-md: 2rem;
+    --padding-lg: 5rem;
+    --gap-sm: 1rem;
+    --gap-md: 1.5rem;
+    --gap-lg: 2rem;
+
+    /* Font Sizes */
+    --font-size-base: 1rem; /* 16px */
+    --font-size-sm: 0.875rem; /* 14px */
+    --font-size-md: 1.125rem; /* 18px */
+    --font-size-lg: 1.25rem; /* 20px */
+    --font-size-xl: 1.5rem; /* 24px */
+    --font-size-2xl: 1.875rem; /* 30px */
+    --font-size-3xl: 2.25rem; /* 36px */
+    --font-size-4xl: 3rem; /* 48px */
+
+    /* Border Radii */
+    --radius-sm: 0.5rem;
+    --radius-md: 0.75rem;
+    --radius-lg: 1rem;
+    --radius-full: 9999px;
+
+    /* Shadows */
+    --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+
+    /* Transitions */
+    --transition-speed: 0.3s;
+    --transition-timing: ease;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 html {
     scroll-behavior: smooth;
     font-family: 'Inter', sans-serif;
-    color: #333;
+    color: var(--text-dark);
 }
 
 body {
     margin: 0;
     padding: 0;
-    font-size: 16px;
+    font-size: var(--font-size-base);
     line-height: 1.6;
-    background-color: #f8f8f8;
+    background-color: var(--background-light);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -23,32 +93,81 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 var(--padding-sm);
 }
 
+.main-content {
+    /* Adjust padding to prevent content from being hidden by fixed navbar */
+    padding-top: calc(4rem + 1rem); /* Approx navbar height + some spacing */
+}
+
+/* Utility Classes */
 .hidden { display: none !important; }
-.text-blue { color: #1d4ed8; }
-.text-light-blue { color: #bfdbfe; }
-.text-yellow { color: #facc15; }
-.text-green { color: #16a34a; }
+.block { display: block; }
+.text-center { text-align: center; }
+.text-left { text-align: left; } /* Added for the speech content */
+.max-w-4xl { max-width: 56rem; } /* Approx 896px for max-width used in container */
+
+/* Color Utilities (retained for direct usage in HTML if needed) */
+.text-blue { color: var(--primary-blue); }
+.text-light-blue { color: var(--light-blue); }
+.text-yellow { color: var(--accent-yellow); }
+.text-green { color: var(--accent-green); }
+
+/* Font Utilities */
 .font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+.font-extrabold { font-weight: 800; }
+.mobile-break { display: none; } /* Used for line breaks visible only on mobile via media query */
+
 
 .section-title {
-    font-size: 2.25rem;
-    font-weight: 700;
+    font-size: var(--font-size-3xl); /* 2.25rem */
+    font-weight: var(--font-extrabold);
     text-align: center;
-    margin-bottom: 2.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 4px solid #93c5fd;
+    margin-bottom: var(--padding-lg); /* 2.5rem changed to 40px for consistency */
+    padding-bottom: var(--padding-sm);
+    border-bottom: 4px solid var(--light-blue);
     display: inline-block;
-    color: #1e40af;
+    color: var(--dark-blue);
 }
 
-/* ======================== NAVIGATION ======================== */
+/* Buttons */
+.button {
+    display: inline-block;
+    padding: var(--padding-sm) var(--padding-md);
+    border-radius: var(--radius-full);
+    font-weight: var(--font-bold);
+    font-size: var(--font-size-lg); /* 1.25rem */
+    text-decoration: none;
+    transition: all var(--transition-speed) var(--transition-timing);
+}
+
+.button-blue {
+    background-color: var(--primary-blue);
+    color: var(--background-white);
+}
+
+.button-white {
+    background-color: var(--background-white);
+    color: var(--primary-blue);
+}
+
+.button:hover {
+    transform: scale(1.05);
+}
+
+/* Icons (SVGs) */
+.icon-sm { width: 1.5rem; height: 1.5rem; } /* Adjusted based on typical usage */
+.icon-md { width: 2rem; height: 2rem; }
+.icon-lg { width: 2.5rem; height: 2.5rem; }
+
+
+/* --- 2. Navigation Bar --- */
 .navbar {
-    background-color: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 1rem;
+    background-color: var(--background-white);
+    box-shadow: var(--shadow-sm);
+    padding: var(--padding-sm);
     position: fixed;
     width: 100%;
     top: 0;
@@ -59,86 +178,97 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
+    max-width: var(--container-width, 1200px); /* Use CSS variable for consistency if applicable */
     margin: 0 auto;
 }
 
 .navbar-brand {
-    font-size: 1.875rem;
-    font-weight: 800;
-    color: #1d4ed8;
+    font-size: var(--font-size-2xl); /* 1.875rem */
+    font-weight: var(--font-extrabold);
+    color: var(--primary-blue);
     text-decoration: none;
 }
 
 .navbar-links {
-    display: none;
-    gap: 1.5rem;
+    display: none; /* Hidden by default for mobile */
+    gap: var(--gap-md);
 }
 
 .nav-link {
-    font-size: 1.125rem;
-    color: #4b5563;
+    font-size: var(--font-size-md); /* 1.125rem */
+    color: var(--text-medium);
     text-decoration: none;
     font-weight: 500;
+    transition: color var(--transition-speed) var(--transition-timing);
 }
 
 .nav-link:hover {
-    color: #1d4ed8;
+    color: var(--primary-blue);
 }
 
 .mobile-menu-button {
     background: none;
     border: none;
-    color: #4b5563;
+    color: var(--text-medium);
     cursor: pointer;
+    display: block; /* Visible by default for mobile */
+    padding: 0.5rem; /* Add some padding for easier tapping */
 }
 
-@media (min-width: 768px) {
-    .navbar-links {
-        display: flex;
-    }
-    .mobile-menu-button {
-        display: none;
-    }
-}
 
+/* --- 3. Mobile Menu Overlay --- */
 .mobile-menu-overlay {
     position: fixed;
-    inset: 0;
-    background-color: #fff;
-    z-index: 10;
+    inset: 0; /* top, right, bottom, left to 0 */
+    background-color: var(--background-white);
+    z-index: 10; /* Lower than navbar to be behind it initially */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2rem;
-    font-size: 1.5rem;
+    gap: var(--gap-lg);
+    font-size: var(--font-size-xl); /* 1.5rem */
+    transition: transform var(--transition-speed) var(--transition-timing); /* Add transition for smooth open/close */
+    transform: translateX(100%); /* Start off-screen */
+}
+
+.mobile-menu-overlay:not(.hidden) {
+    transform: translateX(0); /* Slide in when not hidden */
 }
 
 .nav-link-mobile {
-    color: #4b5563;
+    color: var(--text-medium);
     font-weight: 500;
     text-decoration: none;
+    padding: 0.5rem 1rem; /* Add padding for better touch targets */
+    transition: color var(--transition-speed) var(--transition-timing);
+}
+
+.nav-link-mobile:hover {
+    color: var(--primary-blue);
 }
 
 .mobile-menu-close-button {
     position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
+    top: var(--padding-md); /* 1.5rem */
+    right: var(--padding-md); /* 1.5rem */
     background: none;
     border: none;
-    color: #4b5563;
+    color: var(--text-medium);
     cursor: pointer;
+    padding: 0.5rem; /* Add padding for easier tapping */
 }
 
-/* ======================== HERO SECTION ======================== */
+
+/* --- 4. Hero Section --- */
 .hero-section {
     position: relative;
-    background: linear-gradient(to bottom right, #2563eb, #4338ca);
-    color: #fff;
-    padding: 8rem 1rem;
+    background: linear-gradient(to bottom right, #2563eb, #4338ca); /* Original gradient */
+    color: var(--background-white);
+    padding: var(--padding-lg) var(--padding-sm); /* 8rem for top/bottom */
     text-align: center;
-    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden; /* Hide overflowing background image */
 }
 
 .hero-background-overlay {
@@ -148,185 +278,184 @@ body {
     background-position: center;
     opacity: 0.2;
     z-index: 1;
+    pointer-events: none; /* Allow clicks to pass through to content */
 }
 
 .hero-content {
     position: relative;
     z-index: 2;
-    max-width: 1200px;
+    max-width: var(--container-width, 1200px);
     margin: 0 auto;
 }
 
 .hero-title {
-    font-size: 3rem;
-    font-weight: 800;
+    font-size: var(--font-size-4xl); /* 3rem */
+    font-weight: var(--font-extrabold);
     line-height: 1.25;
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--gap-md);
 }
 
 .hero-subtitle {
-    font-size: 1.25rem;
-    margin-bottom: 3rem;
+    font-size: var(--font-size-lg); /* 1.25rem */
+    margin-bottom: 3rem; /* Keep original spacing if it works */
     font-weight: 300;
+}
+
+.hero-info-group {
+    margin-bottom: 3rem; /* Keep original spacing if it works */
 }
 
 .hero-info-text {
     background-color: rgba(255,255,255,0.2);
-    padding: 1rem 2rem;
-    border-radius: 0.75rem;
+    padding: var(--padding-sm) var(--padding-md);
+    border-radius: var(--radius-md);
     display: inline-block;
-    font-weight: 600;
-    font-size: 1.25rem;
-    margin-bottom: 3rem;
+    font-weight: var(--font-semibold);
+    font-size: var(--font-size-lg); /* 1.25rem */
 }
 
 .hero-cta-group {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: var(--gap-sm);
     align-items: center;
     justify-content: center;
-    margin-bottom: 4rem;
+    margin-bottom: 4rem; /* Keep original spacing if it works */
 }
 
-.button {
-    display: inline-block;
-    padding: 1rem 2rem;
-    border-radius: 9999px;
-    font-weight: 700;
-    font-size: 1.25rem;
-    text-decoration: none;
-    transition: all 0.3s ease;
+.hero-teaser-card {
+    background-color: rgba(255,255,255,0.1);
+    padding: var(--padding-md);
+    border-radius: var(--radius-md);
+    display: inline-block; /* Makes it shrink to content */
+    margin-top: var(--gap-lg);
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
 }
 
-.button-blue {
-    background-color: #3b82f6;
-    color: #fff;
+.hero-teaser-title {
+    font-size: var(--font-size-xl); /* 1.5rem */
+    font-weight: var(--font-bold);
+    margin-bottom: 0.5rem;
 }
 
-.button-white {
-    background-color: #fff;
-    color: #1d4ed8;
+.hero-teaser-text {
+    font-size: var(--font-size-md); /* 1.125rem */
+    font-weight: 300;
 }
 
-.button:hover {
-    transform: scale(1.05);
-}
-
-/* ======================== ABOUT SECTION ======================== */
+/* --- 5. About Ceremony Section --- */
 .about-section {
-    background-color: #f3f4f6;
-    padding: 5rem 1rem;
+    background-color: var(--background-light);
+    padding: var(--padding-lg) var(--padding-sm);
     text-align: center;
 }
 
-.section-description {
-    font-size: 1.125rem;
-    color: #4b5563;
-    max-width: 800px;
-    margin: 2rem auto 0;
+.about-section .section-description {
+    font-size: var(--font-size-md); /* 1.125rem */
+    color: var(--text-medium);
+    margin: var(--gap-lg) auto 0;
+    max-width: 800px; /* Aligned with original */
 }
 
 .principal-photo {
-    width: 144px;
-    height: 144px;
-    border-radius: 9999px;
+    width: 144px; /* Fixed size */
+    height: 144px; /* Fixed size */
+    border-radius: var(--radius-full);
     object-fit: cover;
-    border: 4px solid #3b82f6;
-    margin-top: 2rem;
+    border: 4px solid var(--primary-blue);
+    margin-top: var(--gap-lg);
 }
 
 .principal-quote {
-    font-weight: 600;
-    font-size: 1.125rem;
-    color: #4b5563;
-    margin-top: 1rem;
+    font-weight: var(--font-semibold);
+    font-size: var(--font-size-md); /* 1.125rem */
+    color: var(--text-medium);
+    margin-top: var(--gap-sm);
 }
 
-/* ======================== GRADUANDS SECTION ======================== */
+/* --- 6. Graduands Section --- */
 .graduands-section {
-    background-color: #fff;
-    padding: 5rem 1rem;
+    background-color: var(--background-white);
+    padding: var(--padding-lg) var(--padding-sm);
 }
 
 .graduand-filters {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: var(--gap-md);
     align-items: center;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2.5rem; /* Retained original spacing */
 }
 
 .input-field {
-    padding: 1rem;
-    border: 1px solid #d1d5db;
-    border-radius: 0.5rem;
+    padding: var(--padding-sm);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
     width: 100%;
-    font-size: 1.125rem;
-}
-
-@media (min-width: 768px) {
-    .graduand-filters {
-        flex-direction: row;
-    }
-    .input-field:first-child { width: 33.33%; }
-    .input-field:last-child { width: 25%; }
+    font-size: var(--font-size-md); /* 1.125rem */
 }
 
 .graduands-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
+    gap: var(--gap-lg);
 }
 
 .graduand-card {
-    background: #fff;
-    border-radius: 0.75rem;
-    padding: 1.75rem;
+    background: var(--background-white);
+    border-radius: var(--radius-md);
+    padding: 1.75rem; /* Retained original spacing */
     text-align: center;
-    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
-    border: 1px solid #e5e7eb;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-medium);
+    transition: transform var(--transition-speed) var(--transition-timing);
 }
 
 .graduand-card:hover {
     transform: scale(1.05);
-    transition: transform 0.3s ease;
 }
 
 .graduand-photo {
-    width: 128px;
-    height: 128px;
-    border-radius: 9999px;
+    width: 128px; /* Fixed size */
+    height: 128px; /* Fixed size */
+    border-radius: var(--radius-full);
     object-fit: cover;
-    border: 5px solid #60a5fa;
-    margin-bottom: 1.25rem;
+    border: 5px solid var(--primary-blue); /* Used var for consistency */
+    margin-bottom: 1.25rem; /* Retained original spacing */
 }
 
 .graduand-name {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #1a202c;
+    font-size: var(--font-size-xl); /* 1.5rem */
+    font-weight: var(--font-bold);
+    color: var(--text-dark); /* Changed from #1a202c for consistency */
 }
 
 .graduand-department {
-    font-size: 1.125rem;
+    font-size: var(--font-size-md); /* 1.125rem */
     font-weight: 500;
-    color: #1d4ed8;
+    color: var(--primary-blue);
 }
 
-/* ======================== PROGRAM SECTION ======================== */
+.no-graduands-message {
+    text-align: center;
+    font-size: var(--font-size-lg);
+    color: var(--text-medium);
+    margin-top: var(--gap-lg);
+}
+
+/* --- 7. Program Section --- */
 .program-section {
-    padding: 5rem 1rem;
-    background-color: #eff6ff;
+    padding: var(--padding-lg) var(--padding-sm);
+    background-color: var(--lighter-blue);
 }
 
 .program-content-box {
-    background-color: #fff;
-    border-radius: 1rem;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-    padding: 2rem;
-    border: 1px solid #bfdbfe;
-    max-width: 56rem;
+    background-color: var(--background-white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: var(--padding-md);
+    border: 1px solid var(--light-blue);
+    max-width: var(--max-w-4xl); /* Using utility variable for consistency */
     margin: 0 auto;
 }
 
@@ -334,12 +463,12 @@ body {
     list-style: none;
     padding: 0;
     margin: 0;
-    border-top: 2px solid #bfdbfe;
+    border-top: 2px solid var(--light-blue);
 }
 
 .program-item {
-    padding: 1rem 0;
-    border-bottom: 2px solid #bfdbfe;
+    padding: var(--padding-sm) 0;
+    border-bottom: 2px solid var(--light-blue);
     text-align: left;
 }
 
@@ -348,16 +477,16 @@ body {
 }
 
 .program-activity {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #1a202c;
+    font-size: var(--font-size-xl); /* 1.5rem */
+    font-weight: var(--font-semibold);
+    color: var(--text-dark); /* Changed from #1a202c for consistency */
 }
 
 .program-sub-awards {
     margin-top: 0.5rem;
-    margin-left: 2rem;
-    font-size: 1rem;
-    color: #4b5563;
+    margin-left: var(--gap-lg);
+    font-size: var(--font-size-base); /* 1rem */
+    color: var(--text-medium);
     list-style-type: disc;
 }
 
@@ -365,36 +494,212 @@ body {
     margin-bottom: 0.25rem;
 }
 
-/* ======================== FOOTER ======================== */
-.footer {
-    background-color: #1f2937;
-    color: #fff;
+/* --- 8. New Website Teaser Section --- */
+.new-website-section {
+    background: linear-gradient(to right, var(--primary-blue), var(--dark-blue));
+    color: var(--background-white);
+    padding: var(--padding-lg) var(--padding-sm);
     text-align: center;
-    padding: 2.5rem 1rem;
+}
+
+.new-website-title {
+    font-size: var(--font-size-3xl); /* 2.25rem */
+    font-weight: var(--font-bold);
+    line-height: 1.2;
+    margin-bottom: var(--gap-md);
+}
+
+.new-website-description {
+    font-size: var(--font-size-lg); /* 1.25rem */
+    margin-bottom: var(--gap-lg);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.new-website-launch-info {
+    background-color: var(--accent-yellow);
+    color: var(--text-dark);
+    font-weight: var(--font-bold);
+    font-size: var(--font-size-xl);
+    padding: 0.75rem var(--padding-md);
+    border-radius: var(--radius-sm);
+    display: inline-block;
+    margin-bottom: var(--gap-lg);
+}
+
+.new-website-follow-us {
+    font-size: var(--font-size-md);
+    font-weight: 300;
+}
+
+
+/* --- 9. Contact / FAQ Section --- */
+.contact-section {
+    background-color: var(--background-white);
+    padding: var(--padding-lg) var(--padding-sm);
+}
+
+.contact-faq-box {
+    background-color: var(--background-white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: var(--padding-md);
+    border: 1px solid var(--border-medium);
+    max-width: var(--max-w-4xl);
+    margin: 0 auto;
+}
+
+.contact-info-section {
+    margin-bottom: var(--gap-lg);
+}
+
+.contact-faq-heading {
+    font-size: var(--font-size-xl); /* 1.5rem */
+    font-weight: var(--font-bold);
+    color: var(--dark-blue);
+    margin-bottom: var(--gap-md);
+    text-align: center;
+}
+
+.contact-detail {
+    font-size: var(--font-size-md);
+    color: var(--text-medium);
+    margin-bottom: 0.75rem;
+    line-height: 1.5;
+}
+
+.contact-detail:last-child {
+    margin-bottom: 0;
+}
+
+.contact-link {
+    color: var(--primary-blue);
+    text-decoration: none;
+    transition: color var(--transition-speed) var(--transition-timing);
+}
+
+.contact-link:hover {
+    text-decoration: underline;
+}
+
+/* --- 10. Footer --- */
+.footer {
+    background-color: #1f2937; /* Retained original dark gray */
+    color: var(--background-white);
+    text-align: center;
+    padding: 2.5rem var(--padding-sm); /* Retained original spacing */
 }
 
 .footer-text {
-    font-size: 1.125rem;
+    font-size: var(--font-size-md); /* 1.125rem */
     margin-bottom: 0.5rem;
 }
 
 .footer-tagline {
-    font-size: 1rem;
-    color: #9ca3af;
+    font-size: var(--font-size-base); /* 1rem */
+    color: var(--text-light);
 }
 
 .social-icons {
     display: flex;
     justify-content: center;
-    gap: 1.5rem;
-    margin-top: 1.5rem;
+    gap: var(--gap-md);
+    margin-top: var(--gap-md);
 }
 
 .social-icon {
-    color: #9ca3af;
-    transition: color 0.3s ease;
+    color: var(--text-light);
+    transition: color var(--transition-speed) var(--transition-timing);
+    padding: 0.5rem; /* Make clickable area larger */
 }
 
 .social-icon:hover {
-    color: #60a5fa;
+    color: var(--primary-blue); /* Changed from #60a5fa for brand consistency */
+}
+
+
+/* --- 11. Responsive Design / Media Queries --- */
+
+@media (min-width: 768px) {
+    .main-content {
+        padding-top: calc(4rem + 0.5rem); /* Adjust padding for larger screens if navbar height changes */
+    }
+
+    .navbar-links {
+        display: flex; /* Show desktop navigation links */
+    }
+
+    .mobile-menu-button {
+        display: none; /* Hide the hamburger menu button */
+    }
+
+    .hero-title {
+        font-size: 4rem; /* Larger font size for desktop hero title */
+    }
+
+    .hero-subtitle {
+        font-size: 1.5rem; /* Larger font size for desktop hero subtitle */
+    }
+
+    .hero-cta-group {
+        flex-direction: row; /* Buttons side-by-side on desktop */
+    }
+
+    .graduand-filters {
+        flex-direction: row; /* Filters side-by-side on desktop */
+        justify-content: center;
+    }
+
+    .input-field:first-child { width: 33.33%; }
+    .input-field:last-child { width: 25%; }
+
+    .program-activity {
+        font-size: 1.75rem; /* Slightly larger program activity text */
+    }
+
+    .new-website-title {
+        font-size: 3rem; /* Larger new website title */
+    }
+
+    .mobile-break {
+        display: inline; /* Show the line break on desktop */
+    }
+}
+
+@media (min-width: 1024px) {
+    .section-title {
+        font-size: 3rem; /* Even larger section titles for very large screens */
+    }
+}
+
+/* --- 12. Animations --- */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-down {
+    animation: fadeInDown 1s ease-out forwards;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.02);
+    }
+}
+
+.animate-pulse {
+    animation: pulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
 }
