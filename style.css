@@ -2,7 +2,7 @@
  * Academy Hall Montessori Graduation Website CSS
  *
  * This stylesheet provides the core styling for the graduation website,
- * including responsive design, layout, and visual enhancements.
+ * with a strong focus on mobile-first responsiveness and readability.
  *
  * Table of Contents:
  * 1. General Styles & Utilities
@@ -15,7 +15,7 @@
  * 8. New Website Teaser Section
  * 9. Contact / FAQ Section
  * 10. Footer
- * 11. Responsive Design / Media Queries
+ * 11. Responsive Design / Media Queries (Desktop Adjustments)
  * 12. Animations
  */
 
@@ -37,37 +37,43 @@
     --border-medium: #e5e7eb;
 
     /* Spacing */
-    --padding-sm: 1rem;
-    --padding-md: 2rem;
-    --padding-lg: 5rem;
-    --gap-sm: 1rem;
-    --gap-md: 1.5rem;
-    --gap-lg: 2rem;
+    --spacing-xs: 0.5rem;   /* 8px */
+    --spacing-sm: 1rem;     /* 16px */
+    --spacing-md: 1.5rem;   /* 24px */
+    --spacing-lg: 2rem;     /* 32px */
+    --spacing-xl: 3rem;     /* 48px */
+    --spacing-2xl: 4rem;    /* 64px */
+    --spacing-3xl: 5rem;    /* 80px */
+    --spacing-4xl: 6rem;    /* 96px */
+    --spacing-5xl: 8rem;    /* 128px */
 
-    /* Font Sizes */
-    --font-size-base: 1rem; /* 16px */
+    /* Font Sizes (Mobile First) */
+    --font-size-xs: 0.75rem;  /* 12px */
     --font-size-sm: 0.875rem; /* 14px */
+    --font-size-base: 1rem;   /* 16px */
     --font-size-md: 1.125rem; /* 18px */
-    --font-size-lg: 1.25rem; /* 20px */
-    --font-size-xl: 1.5rem; /* 24px */
-    --font-size-2xl: 1.875rem; /* 30px */
+    --font-size-lg: 1.25rem;  /* 20px */
+    --font-size-xl: 1.5rem;   /* 24px */
+    --font-size-2xl: 1.875rem;/* 30px */
     --font-size-3xl: 2.25rem; /* 36px */
-    --font-size-4xl: 3rem; /* 48px */
+    --font-size-4xl: 2.5rem;  /* 40px for mobile hero title */
+    --font-size-5xl: 3rem;    /* 48px for desktop hero title */
 
     /* Border Radii */
-    --radius-sm: 0.5rem;
-    --radius-md: 0.75rem;
-    --radius-lg: 1rem;
+    --radius-sm: 0.25rem; /* Slightly smaller for mobile */
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
     --radius-full: 9999px;
 
     /* Shadows */
-    --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 5px 10px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
 
     /* Transitions */
     --transition-speed: 0.3s;
-    --transition-timing: ease;
+    --transition-timing: ease-in-out;
 }
 
 *, *::before, *::after {
@@ -93,22 +99,22 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 var(--padding-sm);
+    padding: 0 var(--spacing-sm); /* Default padding for all sections */
 }
 
+/* Ensure main content starts below the fixed navbar */
 .main-content {
-    /* Adjust padding to prevent content from being hidden by fixed navbar */
-    padding-top: calc(4rem + 1rem); /* Approx navbar height + some spacing */
+    padding-top: calc(var(--spacing-2xl) + var(--spacing-sm)); /* Approx navbar height + some spacing */
 }
 
 /* Utility Classes */
 .hidden { display: none !important; }
 .block { display: block; }
 .text-center { text-align: center; }
-.text-left { text-align: left; } /* Added for the speech content */
-.max-w-4xl { max-width: 56rem; } /* Approx 896px for max-width used in container */
+.text-left { text-align: left; }
+.max-w-4xl { max-width: 56rem; }
 
-/* Color Utilities (retained for direct usage in HTML if needed) */
+/* Color Utilities */
 .text-blue { color: var(--primary-blue); }
 .text-light-blue { color: var(--light-blue); }
 .text-yellow { color: var(--accent-yellow); }
@@ -118,29 +124,32 @@ body {
 .font-semibold { font-weight: 600; }
 .font-bold { font-weight: 700; }
 .font-extrabold { font-weight: 800; }
-.mobile-break { display: none; } /* Used for line breaks visible only on mobile via media query */
+.mobile-break { display: inline; } /* Default to inline, desktop media query can change if needed */
 
 
 .section-title {
     font-size: var(--font-size-3xl); /* 2.25rem */
     font-weight: var(--font-extrabold);
     text-align: center;
-    margin-bottom: var(--padding-lg); /* 2.5rem changed to 40px for consistency */
-    padding-bottom: var(--padding-sm);
-    border-bottom: 4px solid var(--light-blue);
+    margin-bottom: var(--spacing-xl); /* Adjusted for mobile */
+    padding-bottom: var(--spacing-xs); /* Reduced padding */
+    border-bottom: 3px solid var(--light-blue); /* Thinner border */
     display: inline-block;
     color: var(--dark-blue);
+    line-height: 1.2;
 }
 
 /* Buttons */
 .button {
-    display: inline-block;
-    padding: var(--padding-sm) var(--padding-md);
+    display: block; /* Stack buttons vertically on mobile */
+    width: 100%; /* Full width for mobile buttons */
+    padding: var(--spacing-sm) var(--spacing-md);
     border-radius: var(--radius-full);
     font-weight: var(--font-bold);
-    font-size: var(--font-size-lg); /* 1.25rem */
+    font-size: var(--font-size-md); /* 1.125rem */
     text-decoration: none;
     transition: all var(--transition-speed) var(--transition-timing);
+    text-align: center; /* Ensure text is centered in block button */
 }
 
 .button-blue {
@@ -151,23 +160,25 @@ body {
 .button-white {
     background-color: var(--background-white);
     color: var(--primary-blue);
+    border: 1px solid var(--primary-blue); /* Add border for contrast */
 }
 
 .button:hover {
-    transform: scale(1.05);
+    transform: translateY(-2px); /* Slight lift on hover */
+    box-shadow: var(--shadow-sm);
 }
 
 /* Icons (SVGs) */
-.icon-sm { width: 1.5rem; height: 1.5rem; } /* Adjusted based on typical usage */
-.icon-md { width: 2rem; height: 2rem; }
-.icon-lg { width: 2.5rem; height: 2.5rem; }
+.icon-sm { width: 1.25rem; height: 1.25rem; }
+.icon-md { width: 1.75rem; height: 1.75rem; }
+.icon-lg { width: 2.25rem; height: 2.25rem; }
 
 
 /* --- 2. Navigation Bar --- */
 .navbar {
     background-color: var(--background-white);
     box-shadow: var(--shadow-sm);
-    padding: var(--padding-sm);
+    padding: var(--spacing-sm);
     position: fixed;
     width: 100%;
     top: 0;
@@ -178,24 +189,24 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: var(--container-width, 1200px); /* Use CSS variable for consistency if applicable */
+    max-width: 1200px;
     margin: 0 auto;
 }
 
 .navbar-brand {
-    font-size: var(--font-size-2xl); /* 1.875rem */
+    font-size: var(--font-size-xl); /* 1.5rem for mobile brand */
     font-weight: var(--font-extrabold);
     color: var(--primary-blue);
     text-decoration: none;
+    line-height: 1.2;
 }
 
 .navbar-links {
     display: none; /* Hidden by default for mobile */
-    gap: var(--gap-md);
 }
 
 .nav-link {
-    font-size: var(--font-size-md); /* 1.125rem */
+    font-size: var(--font-size-md);
     color: var(--text-medium);
     text-decoration: none;
     font-weight: 500;
@@ -209,26 +220,26 @@ body {
 .mobile-menu-button {
     background: none;
     border: none;
-    color: var(--text-medium);
+    color: var(--primary-blue); /* More prominent color */
     cursor: pointer;
     display: block; /* Visible by default for mobile */
-    padding: 0.5rem; /* Add some padding for easier tapping */
+    padding: var(--spacing-xs);
 }
 
 
 /* --- 3. Mobile Menu Overlay --- */
 .mobile-menu-overlay {
     position: fixed;
-    inset: 0; /* top, right, bottom, left to 0 */
+    inset: 0;
     background-color: var(--background-white);
-    z-index: 10; /* Lower than navbar to be behind it initially */
+    z-index: 10;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: var(--gap-lg);
-    font-size: var(--font-size-xl); /* 1.5rem */
-    transition: transform var(--transition-speed) var(--transition-timing); /* Add transition for smooth open/close */
+    gap: var(--spacing-xl); /* Increased gap for better touch targets */
+    font-size: var(--font-size-2xl); /* Larger font for mobile menu */
+    transition: transform var(--transition-speed) var(--transition-timing);
     transform: translateX(100%); /* Start off-screen */
 }
 
@@ -240,7 +251,7 @@ body {
     color: var(--text-medium);
     font-weight: 500;
     text-decoration: none;
-    padding: 0.5rem 1rem; /* Add padding for better touch targets */
+    padding: var(--spacing-xs) var(--spacing-sm);
     transition: color var(--transition-speed) var(--transition-timing);
 }
 
@@ -250,25 +261,29 @@ body {
 
 .mobile-menu-close-button {
     position: absolute;
-    top: var(--padding-md); /* 1.5rem */
-    right: var(--padding-md); /* 1.5rem */
+    top: var(--spacing-md);
+    right: var(--spacing-md);
     background: none;
     border: none;
     color: var(--text-medium);
     cursor: pointer;
-    padding: 0.5rem; /* Add padding for easier tapping */
+    padding: var(--spacing-xs);
 }
 
 
 /* --- 4. Hero Section --- */
 .hero-section {
     position: relative;
-    background: linear-gradient(to bottom right, #2563eb, #4338ca); /* Original gradient */
+    background: linear-gradient(to bottom right, #2563eb, #4338ca);
     color: var(--background-white);
-    padding: var(--padding-lg) var(--padding-sm); /* 8rem for top/bottom */
+    padding: var(--spacing-5xl) var(--spacing-sm) var(--spacing-4xl); /* More vertical padding */
     text-align: center;
     box-shadow: var(--shadow-lg);
-    overflow: hidden; /* Hide overflowing background image */
+    overflow: hidden;
+    display: flex; /* Use flex for content centering */
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Make hero full height on mobile */
 }
 
 .hero-background-overlay {
@@ -278,184 +293,217 @@ body {
     background-position: center;
     opacity: 0.2;
     z-index: 1;
-    pointer-events: none; /* Allow clicks to pass through to content */
+    pointer-events: none;
 }
 
 .hero-content {
     position: relative;
     z-index: 2;
-    max-width: var(--container-width, 1200px);
+    max-width: 1200px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Fill hero section height */
 }
 
 .hero-title {
-    font-size: var(--font-size-4xl); /* 3rem */
+    font-size: var(--font-size-4xl); /* 2.5rem for mobile */
     font-weight: var(--font-extrabold);
     line-height: 1.25;
-    margin-bottom: var(--gap-md);
+    margin-bottom: var(--spacing-sm);
 }
 
 .hero-subtitle {
-    font-size: var(--font-size-lg); /* 1.25rem */
-    margin-bottom: 3rem; /* Keep original spacing if it works */
+    font-size: var(--font-size-md); /* 1.125rem for mobile */
+    margin-bottom: var(--spacing-lg);
     font-weight: 300;
 }
 
 .hero-info-group {
-    margin-bottom: 3rem; /* Keep original spacing if it works */
+    margin-bottom: var(--spacing-lg);
 }
 
 .hero-info-text {
     background-color: rgba(255,255,255,0.2);
-    padding: var(--padding-sm) var(--padding-md);
+    padding: var(--spacing-xs) var(--spacing-sm); /* Smaller padding */
     border-radius: var(--radius-md);
     display: inline-block;
     font-weight: var(--font-semibold);
-    font-size: var(--font-size-lg); /* 1.25rem */
+    font-size: var(--font-size-base); /* 1rem for mobile info text */
+    line-height: 1.5;
 }
 
 .hero-cta-group {
     display: flex;
-    flex-direction: column;
-    gap: var(--gap-sm);
+    flex-direction: column; /* Stack buttons */
+    gap: var(--spacing-sm);
     align-items: center;
     justify-content: center;
-    margin-bottom: 4rem; /* Keep original spacing if it works */
+    margin-bottom: var(--spacing-xl);
+    width: 100%; /* Ensure buttons take full width */
+    max-width: 300px; /* Limit button group width */
 }
 
 .hero-teaser-card {
-    background-color: rgba(255,255,255,0.1);
-    padding: var(--padding-md);
-    border-radius: var(--radius-md);
-    display: inline-block; /* Makes it shrink to content */
-    margin-top: var(--gap-lg);
-    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    background-color: rgba(255,255,255,0.15); /* Slightly more opaque */
+    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
+    display: block; /* Make it a block for better mobile spacing */
+    margin-top: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
 }
 
 .hero-teaser-title {
-    font-size: var(--font-size-xl); /* 1.5rem */
+    font-size: var(--font-size-lg); /* 1.25rem for mobile */
     font-weight: var(--font-bold);
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--spacing-xs);
 }
 
 .hero-teaser-text {
-    font-size: var(--font-size-md); /* 1.125rem */
+    font-size: var(--font-size-base); /* 1rem for mobile */
     font-weight: 300;
 }
 
 /* --- 5. About Ceremony Section --- */
 .about-section {
     background-color: var(--background-light);
-    padding: var(--padding-lg) var(--padding-sm);
+    padding: var(--spacing-3xl) var(--spacing-sm); /* Adjusted padding */
     text-align: center;
 }
 
 .about-section .section-description {
-    font-size: var(--font-size-md); /* 1.125rem */
+    font-size: var(--font-size-base); /* 1rem for main text */
     color: var(--text-medium);
-    margin: var(--gap-lg) auto 0;
-    max-width: 800px; /* Aligned with original */
+    margin: var(--spacing-xl) auto 0;
+    max-width: 800px;
+    text-align: left; /* Ensure speech text aligns left */
+}
+
+.about-section .section-description h3 {
+    font-size: var(--font-size-xl); /* 1.5rem for speech headings */
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    color: var(--dark-blue);
+}
+
+.about-section .section-description p {
+    margin-bottom: var(--spacing-sm);
+}
+
+.about-section .section-description hr {
+    border: none;
+    border-top: 1px dashed var(--border-light);
+    margin: var(--spacing-lg) 0;
+}
+
+.principal-message {
+    margin-top: var(--spacing-xl);
 }
 
 .principal-photo {
-    width: 144px; /* Fixed size */
-    height: 144px; /* Fixed size */
+    width: 120px; /* Slightly smaller on mobile */
+    height: 120px;
     border-radius: var(--radius-full);
     object-fit: cover;
-    border: 4px solid var(--primary-blue);
-    margin-top: var(--gap-lg);
+    border: 3px solid var(--primary-blue);
+    margin-bottom: var(--spacing-sm);
 }
 
 .principal-quote {
     font-weight: var(--font-semibold);
-    font-size: var(--font-size-md); /* 1.125rem */
+    font-size: var(--font-size-sm); /* 0.875rem for quote */
     color: var(--text-medium);
-    margin-top: var(--gap-sm);
+    margin-top: 0;
 }
 
 /* --- 6. Graduands Section --- */
 .graduands-section {
     background-color: var(--background-white);
-    padding: var(--padding-lg) var(--padding-sm);
+    padding: var(--spacing-3xl) var(--spacing-sm);
 }
 
 .graduand-filters {
     display: flex;
-    flex-direction: column;
-    gap: var(--gap-md);
+    flex-direction: column; /* Stack filters on mobile */
+    gap: var(--spacing-md);
     align-items: center;
-    margin-bottom: 2.5rem; /* Retained original spacing */
+    margin-bottom: var(--spacing-xl);
 }
 
 .input-field {
-    padding: var(--padding-sm);
+    padding: var(--spacing-sm);
     border: 1px solid var(--border-light);
-    border-radius: var(--radius-sm);
-    width: 100%;
-    font-size: var(--font-size-md); /* 1.125rem */
+    border-radius: var(--radius-md);
+    width: 100%; /* Full width for inputs */
+    font-size: var(--font-size-base);
 }
 
 .graduands-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--gap-lg);
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Smaller cards for mobile */
+    gap: var(--spacing-lg);
 }
 
 .graduand-card {
     background: var(--background-white);
     border-radius: var(--radius-md);
-    padding: 1.75rem; /* Retained original spacing */
+    padding: var(--spacing-md);
     text-align: center;
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-sm);
     border: 1px solid var(--border-medium);
     transition: transform var(--transition-speed) var(--transition-timing);
 }
 
 .graduand-card:hover {
-    transform: scale(1.05);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
 }
 
 .graduand-photo {
-    width: 128px; /* Fixed size */
-    height: 128px; /* Fixed size */
+    width: 100px; /* Smaller photo on mobile */
+    height: 100px;
     border-radius: var(--radius-full);
     object-fit: cover;
-    border: 5px solid var(--primary-blue); /* Used var for consistency */
-    margin-bottom: 1.25rem; /* Retained original spacing */
+    border: 3px solid var(--light-blue); /* Lighter border */
+    margin-bottom: var(--spacing-sm);
 }
 
 .graduand-name {
-    font-size: var(--font-size-xl); /* 1.5rem */
+    font-size: var(--font-size-lg); /* 1.25rem for name */
     font-weight: var(--font-bold);
-    color: var(--text-dark); /* Changed from #1a202c for consistency */
+    color: var(--text-dark);
+    line-height: 1.2;
+    margin-bottom: var(--spacing-xs);
 }
 
 .graduand-department {
-    font-size: var(--font-size-md); /* 1.125rem */
+    font-size: var(--font-size-sm); /* 0.875rem for department */
     font-weight: 500;
     color: var(--primary-blue);
 }
 
 .no-graduands-message {
     text-align: center;
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-base);
     color: var(--text-medium);
-    margin-top: var(--gap-lg);
+    margin-top: var(--spacing-xl);
 }
 
 /* --- 7. Program Section --- */
 .program-section {
-    padding: var(--padding-lg) var(--padding-sm);
+    padding: var(--spacing-3xl) var(--spacing-sm);
     background-color: var(--lighter-blue);
 }
 
 .program-content-box {
     background-color: var(--background-white);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
-    padding: var(--padding-md);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
+    padding: var(--spacing-lg); /* Increased padding for box content */
     border: 1px solid var(--light-blue);
-    max-width: var(--max-w-4xl); /* Using utility variable for consistency */
+    max-width: var(--max-w-4xl);
     margin: 0 auto;
 }
 
@@ -467,8 +515,8 @@ body {
 }
 
 .program-item {
-    padding: var(--padding-sm) 0;
-    border-bottom: 2px solid var(--light-blue);
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px dashed var(--border-medium); /* Lighter separator */
     text-align: left;
 }
 
@@ -477,41 +525,41 @@ body {
 }
 
 .program-activity {
-    font-size: var(--font-size-xl); /* 1.5rem */
+    font-size: var(--font-size-lg); /* 1.25rem for program activity */
     font-weight: var(--font-semibold);
-    color: var(--text-dark); /* Changed from #1a202c for consistency */
+    color: var(--text-dark);
 }
 
 .program-sub-awards {
-    margin-top: 0.5rem;
-    margin-left: var(--gap-lg);
-    font-size: var(--font-size-base); /* 1rem */
+    margin-top: var(--spacing-xs);
+    margin-left: var(--spacing-lg);
+    font-size: var(--font-size-sm); /* 0.875rem for sub-items */
     color: var(--text-medium);
     list-style-type: disc;
 }
 
 .program-sub-awards li {
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.125rem; /* Very small spacing */
 }
 
 /* --- 8. New Website Teaser Section --- */
 .new-website-section {
     background: linear-gradient(to right, var(--primary-blue), var(--dark-blue));
     color: var(--background-white);
-    padding: var(--padding-lg) var(--padding-sm);
+    padding: var(--spacing-3xl) var(--spacing-sm);
     text-align: center;
 }
 
 .new-website-title {
-    font-size: var(--font-size-3xl); /* 2.25rem */
+    font-size: var(--font-size-2xl); /* 1.875rem for mobile */
     font-weight: var(--font-bold);
     line-height: 1.2;
-    margin-bottom: var(--gap-md);
+    margin-bottom: var(--spacing-sm);
 }
 
 .new-website-description {
-    font-size: var(--font-size-lg); /* 1.25rem */
-    margin-bottom: var(--gap-lg);
+    font-size: var(--font-size-base); /* 1rem for mobile */
+    margin-bottom: var(--spacing-lg);
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
@@ -521,15 +569,16 @@ body {
     background-color: var(--accent-yellow);
     color: var(--text-dark);
     font-weight: var(--font-bold);
-    font-size: var(--font-size-xl);
-    padding: 0.75rem var(--padding-md);
-    border-radius: var(--radius-sm);
+    font-size: var(--font-size-md); /* 1.125rem for mobile */
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-md);
     display: inline-block;
-    margin-bottom: var(--gap-lg);
+    margin-bottom: var(--spacing-lg);
+    animation: pulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1); /* Kept animation */
 }
 
 .new-website-follow-us {
-    font-size: var(--font-size-md);
+    font-size: var(--font-size-sm); /* 0.875rem for mobile */
     font-weight: 300;
 }
 
@@ -537,35 +586,35 @@ body {
 /* --- 9. Contact / FAQ Section --- */
 .contact-section {
     background-color: var(--background-white);
-    padding: var(--padding-lg) var(--padding-sm);
+    padding: var(--spacing-3xl) var(--spacing-sm);
 }
 
 .contact-faq-box {
     background-color: var(--background-white);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
-    padding: var(--padding-md);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
+    padding: var(--spacing-lg);
     border: 1px solid var(--border-medium);
     max-width: var(--max-w-4xl);
     margin: 0 auto;
 }
 
 .contact-info-section {
-    margin-bottom: var(--gap-lg);
+    margin-bottom: var(--spacing-lg);
 }
 
 .contact-faq-heading {
-    font-size: var(--font-size-xl); /* 1.5rem */
+    font-size: var(--font-size-xl); /* 1.5rem for mobile */
     font-weight: var(--font-bold);
     color: var(--dark-blue);
-    margin-bottom: var(--gap-md);
+    margin-bottom: var(--spacing-md);
     text-align: center;
 }
 
 .contact-detail {
-    font-size: var(--font-size-md);
+    font-size: var(--font-size-base); /* 1rem for mobile */
     color: var(--text-medium);
-    margin-bottom: 0.75rem;
+    margin-bottom: var(--spacing-xs);
     line-height: 1.5;
 }
 
@@ -585,121 +634,35 @@ body {
 
 /* --- 10. Footer --- */
 .footer {
-    background-color: #1f2937; /* Retained original dark gray */
+    background-color: #1f2937;
     color: var(--background-white);
     text-align: center;
-    padding: 2.5rem var(--padding-sm); /* Retained original spacing */
+    padding: var(--spacing-lg) var(--spacing-sm); /* Adjusted padding */
 }
 
 .footer-text {
-    font-size: var(--font-size-md); /* 1.125rem */
-    margin-bottom: 0.5rem;
+    font-size: var(--font-size-base); /* 1rem */
+    margin-bottom: var(--spacing-xs);
 }
 
 .footer-tagline {
-    font-size: var(--font-size-base); /* 1rem */
+    font-size: var(--font-size-sm); /* 0.875rem */
     color: var(--text-light);
 }
 
 .social-icons {
     display: flex;
     justify-content: center;
-    gap: var(--gap-md);
-    margin-top: var(--gap-md);
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
 }
 
 .social-icon {
     color: var(--text-light);
     transition: color var(--transition-speed) var(--transition-timing);
-    padding: 0.5rem; /* Make clickable area larger */
+    padding: var(--spacing-xs);
 }
 
 .social-icon:hover {
-    color: var(--primary-blue); /* Changed from #60a5fa for brand consistency */
-}
-
-
-/* --- 11. Responsive Design / Media Queries --- */
-
-@media (min-width: 768px) {
-    .main-content {
-        padding-top: calc(4rem + 0.5rem); /* Adjust padding for larger screens if navbar height changes */
-    }
-
-    .navbar-links {
-        display: flex; /* Show desktop navigation links */
-    }
-
-    .mobile-menu-button {
-        display: none; /* Hide the hamburger menu button */
-    }
-
-    .hero-title {
-        font-size: 4rem; /* Larger font size for desktop hero title */
-    }
-
-    .hero-subtitle {
-        font-size: 1.5rem; /* Larger font size for desktop hero subtitle */
-    }
-
-    .hero-cta-group {
-        flex-direction: row; /* Buttons side-by-side on desktop */
-    }
-
-    .graduand-filters {
-        flex-direction: row; /* Filters side-by-side on desktop */
-        justify-content: center;
-    }
-
-    .input-field:first-child { width: 33.33%; }
-    .input-field:last-child { width: 25%; }
-
-    .program-activity {
-        font-size: 1.75rem; /* Slightly larger program activity text */
-    }
-
-    .new-website-title {
-        font-size: 3rem; /* Larger new website title */
-    }
-
-    .mobile-break {
-        display: inline; /* Show the line break on desktop */
-    }
-}
-
-@media (min-width: 1024px) {
-    .section-title {
-        font-size: 3rem; /* Even larger section titles for very large screens */
-    }
-}
-
-/* --- 12. Animations --- */
-@keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.animate-fade-in-down {
-    animation: fadeInDown 1s ease-out forwards;
-}
-
-@keyframes pulse {
-    0%, 100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 0.8;
-        transform: scale(1.02);
-    }
-}
-
-.animate-pulse {
-    animation: pulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+    color: var(--primary-blue);
 }
