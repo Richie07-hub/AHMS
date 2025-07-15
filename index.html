@@ -256,6 +256,14 @@ function toggleSpeech() {
     const content = document.getElementById("proprietor-speech-content");
     content.style.display = content.style.display === "none" ? "block" : "none";
 }
+        // Mobile menu toggle logic
+function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    menu.classList.toggle('hidden');
+}
+
+// Open menu when mobile-menu-button is clicked
+document.getElementById('mobile-menu-button').addEventListener('click', toggleMobileMenu);
 </script>
 
 </body>
