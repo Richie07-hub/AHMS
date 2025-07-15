@@ -8,7 +8,7 @@
 // Each object includes an ID, name, department, and a placeholder photo URL.
 // You should replace these placeholder URLs with actual image paths.
 const graduandsData = [
-    { id: 1, name: "ADEPITAN Olamide David", department: "Grade 5", photo: "images/1.jpg" },
+    { id: 1, name: "ADEPITAN Olamide David", department: "Grade 5", photo: "1.jpg" },
     { id: 2, name: "ABDULQUADRI Mujeeb Aremu", department: "Grade 5", photo: "images/DSC_0368.jpg" },
     { id: 3, name: "ABDULQUADRI Ibrahim Ishola", department: "Grade 5", photo: "images/DSC_0369.jpg" },
     { id: 4, name: "ADEMEFU Precious Oluwaseun", department: "Grade 5", photo: "images/DSC_0398.jpg" },
