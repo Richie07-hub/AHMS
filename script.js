@@ -1,7 +1,7 @@
 // ====================================================================
-// JAVASCRIPT FOR ACADEMY HALL MONTESSORI GRADUATION WEBSITE INTERACTIVITY
+// JAVASCRIPT FOR GRADUATION WEBSITE INTERACTIVITY
 // This script handles interactive elements like graduand search/filter,
-// speech dropdowns, and mobile menu toggling.
+// FAQ accordion, and mobile menu toggling.
 // ====================================================================
 
 // Array containing sample data for graduands.
@@ -23,7 +23,7 @@ const graduandsData = [
     { id: 13, name: "OKOLO Paul Ojotule", department: "Grade 5", photo: "images/DSC_0391.jpg" },
     { id: 14, name: "RONIK Precious Enifoma", department: "Grade 5", photo: "images/DSC_0378.jpg" },
     { id: 15, name: "SAMUEL Bukola Mercy", department: "Grade 5", photo: "images/DSC_0383.jpg" },
-    { id: 16, name: "ADEDAPO Adeoluwa Samuel", department: "Nursery 2", photo: "images/DSC_" },
+    { id: 16, name: "ADEDAPO Adeoluwa Samuel", department: "Nursery 2 ", photo: "images/DSC_" },
     { id: 17, name: "ADEMEFUN Famous Oluwaseyi", department: "Nursery 2", photo: "images/DSC_" },
     { id: 18, name: "AGBODO Etonam Oluwataramidara", department: "Nursery 2", photo: "images/DSC_" },
     { id: 19, name: "AKOSILE Hamat", department: "Nursery 2", photo: "images/DSC_" },
@@ -33,32 +33,30 @@ const graduandsData = [
     { id: 23, name: "ISHAKA Amida", department: "Nursery 2", photo: "images/DSC_" },
     { id: 24, name: "OGUNNIRAN Toluwalase Joshep", department: "Nursery 2", photo: "images/DSC_" },
     { id: 25, name: "RONIK Dominion", department: "Nursery 2", photo: "images/DSC_" },
-    { id: 26, name: "ADAH David Okeogen", department: "KG 2", photo: "images/DSC_" },
-    { id: 27, name: "ADEDAPO Adedayo Abraham", department: "KG 2", photo: "images/DSC_" },
-    { id: 28, name: "ADEPOJU Adams Ayomide", department: "KG 2", photo: "images/DSC_" },
-    { id: 29, name: "ADEYEMI Daniel Ronaldo", department: "KG 2", photo: "images/DSC_" },
-    { id: 30, name: "ALAKE Oluwajomiloju Olalekan", department: "KG 2", photo: "images/DSC_" },
-    { id: 31, name: "ALAMU Bethel Oreofejesu", department: "KG 2", photo: "images/DSC_" },
-    { id: 32, name: "EHINMISAN Morenikeji Christa", department: "KG 2", photo: "images/DSC_" },
-    { id: 33, name: "GODWIN Chukwuemeka King", department: "KG 2", photo: "images/DSC_" },
-    { id: 34, name: "GREG-IYOHA Daniel Ehizokhae", department: "KG 2", photo: "images/DSC_" },
-    { id: 35, name: "JESSE Divine Sunday", department: "KG 2", photo: "images/DSC_" },
-    { id: 36, name: "MADUEKE Chrstabel Amanda", department: "KG 2", photo: "images/DSC_" },
+    { id: 25, name: "ADAH David Okeogen", department: "KG 2", photo: "images/DSC_" },
+    { id: 26, name: "ADEDAPO Adedayo Abraham", department: "KG 2", photo: "images/DSC_" },
+    { id: 27, name: "ADEPOJU Adams Ayomide", department: "KG 2", photo: "images/DSC_" },
+    { id: 28, name: "ADEYEMI Daniel Ronaldo", department: "KG 2", photo: "images/DSC_" },
+    { id: 29, name: "ALAKE Oluwajomiloju Olalekan", department: "KG 2", photo: "images/DSC_" },
+    { id: 30, name: "ALAMU Bethel Oreofejesu", department: "KG 2", photo: "images/DSC_" },
+    { id: 31, name: "EHINMISAN Morenikeji Christa", department: "KG 2", photo: "images/DSC_" },
+    { id: 32, name: "GODWIN Chukwuemeka King", department: "KG 2", photo: "images/DSC_" },
+    { id: 33, name: "GREG-IYOHA Daniel Ehizokhae", department: "KG 2", photo: "images/DSC_" },
+    { id: 34, name: "JESSE Divine Sunday", department: "KG 2", photo: "images/DSC_" },
+    { id: 35, name: "MADUEKE Chrstabel Amanda", department: "KG 2", photo: "images/DSC_" },
 ];
 
 // Get references to DOM elements used in JavaScript interactions
 const graduandsList = document.getElementById('graduands-list'); // Container for graduand cards
 const graduandSearch = document.getElementById('graduand-search'); // Input field for searching by name
 const graduandFilter = document.getElementById('graduand-filter'); // Dropdown for filtering by department
-
-// Get references for mobile menu
-const mobileMenuButton = document.getElementById('mobile-menu-button'); // Hamburger icon for mobile menu
-const mobileMenuOverlay = document.getElementById('mobile-menu-overlay'); // The mobile menu overlay itself
-const mobileMenuCloseButton = document.getElementById('mobile-menu-close-button'); // Close button in mobile menu
-const mobileNavLinks = document.querySelectorAll('.nav-link-mobile'); // Links inside the mobile menu
-
-// Get reference for no graduands message
 const noGraduandsFound = document.getElementById('no-graduands-found'); // Message for no matching graduands
+const mobileMenuButton = document.getElementById('mobile-menu-button'); // Hamburger icon for mobile menu
+const mobileMenu = document.getElementById('mobile-menu'); // The mobile menu overlay itself
+// Add reference for mobile menu overlay (assuming it has id="mobile-menu-overlay")
+const mobileMenuOverlay = document.getElementById('mobile-menu-overlay'); // Added this line
+const mobileMenuCloseButton = document.getElementById('mobile-menu-close-button'); // Added this line
+const mobileNavLinks = document.querySelectorAll('.nav-link-mobile'); // Added this line
 
 
 /**
@@ -113,8 +111,11 @@ function filterAndSearchGraduands() {
     renderGraduands(filteredGraduands); // Render the filtered list of graduands
 }
 
+// Add event listeners to trigger filtering and searching whenever input changes
+graduandSearch.addEventListener('keyup', filterAndSearchGraduands); // 'keyup' for real-time search as user types
+graduandFilter.addEventListener('change', filterAndSearchGraduands); // 'change' for when a new department is selected
 
-// --- SPEECH DROPDOWN FUNCTIONALITY ---
+// --- NEW: SPEECH DROPDOWN FUNCTIONALITY ---
 /**
  * Initializes the speech dropdown toggles.
  * Attaches click listeners to all buttons with the 'speech-toggle-button' class.
@@ -127,18 +128,41 @@ function setupSpeechDropdowns() {
             const targetId = button.getAttribute('aria-controls');
             const targetContent = document.getElementById(targetId);
 
-            // Toggle the 'hidden' class on the content wrapper
-            targetContent.classList.toggle('hidden');
+            if (!targetContent) {
+                console.error(`Speech content with ID '${targetId}' not found.`);
+                return;
+            }
 
-            // Update accessibility attributes
-            const isExpanded = !targetContent.classList.contains('hidden');
-            button.setAttribute('aria-expanded', isExpanded);
-            targetContent.setAttribute('aria-hidden', !isExpanded);
+            // Check if content is currently hidden
+            const isHidden = targetContent.classList.contains('hidden');
+
+            if (isHidden) {
+                // Show the content
+                targetContent.classList.remove('hidden');
+                // Set max-height to its scrollHeight for smooth expansion
+                targetContent.style.maxHeight = targetContent.scrollHeight + "px";
+                button.setAttribute('aria-expanded', 'true');
+                targetContent.setAttribute('aria-hidden', 'false');
+            } else {
+                // Hide the content
+                // Set max-height to current scrollHeight before setting to 0, for smooth collapse
+                targetContent.style.maxHeight = targetContent.scrollHeight + "px";
+                // Use requestAnimationFrame to ensure the browser registers the max-height before changing it
+                requestAnimationFrame(() => {
+                    targetContent.style.maxHeight = '0';
+                    button.setAttribute('aria-expanded', 'false');
+                    targetContent.setAttribute('aria-hidden', 'true');
+                    // Add 'hidden' class after the transition completes
+                    targetContent.addEventListener('transitionend', function handler() {
+                        targetContent.classList.add('hidden');
+                        targetContent.removeEventListener('transitionend', handler);
+                    }, { once: true });
+                });
+            }
 
             // Optional: Scroll to the button if content expands below viewport
-            if (isExpanded) {
+            if (isHidden) { // Only scroll if it's becoming visible
                 setTimeout(() => {
-                    // Use a more precise scroll behavior
                     button.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 }, 500); // Wait for the animation to start
             }
@@ -146,73 +170,95 @@ function setupSpeechDropdowns() {
     });
 }
 
-// --- MOBILE MENU FUNCTIONALITY ---
+
 /**
- * Initializes the mobile menu toggle functionality.
+ * Toggles the visibility of the mobile navigation menu.
+ * This function is called when the hamburger icon or the close button in the mobile menu is clicked.
  */
-function setupMobileMenu() {
-    if (mobileMenuButton && mobileMenuOverlay && mobileMenuCloseButton) {
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenuOverlay.classList.remove('hidden');
+function toggleMobileMenu() {
+    // Original logic remains, ensure mobileMenuOverlay and other elements are correctly referenced
+    if (mobileMenuOverlay) { // Ensure mobileMenuOverlay is found
+        mobileMenuOverlay.classList.toggle('hidden');
+        if (!mobileMenuOverlay.classList.contains('hidden')) {
             document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
-        });
-
-        mobileMenuCloseButton.addEventListener('click', () => {
-            mobileMenuOverlay.classList.add('hidden');
+        } else {
             document.body.style.overflow = ''; // Restore scrolling
-        });
-
-        // Close mobile menu when a link is clicked
-        mobileNavLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenuOverlay.classList.add('hidden');
-                document.body.style.overflow = '';
-            });
-        });
+        }
+    } else {
+        console.warn("Mobile menu overlay not found. Check HTML ID.");
     }
 }
 
+// Add event listener for the mobile menu button (hamburger icon)
+if (mobileMenuButton) { // Check if the button exists before adding listener
+    mobileMenuButton.addEventListener('click', toggleMobileMenu);
+}
 
-// --- INITIALIZATION ---
-// Event listener for when the entire HTML document has been loaded and parsed.
+
+// --- Original Mobile Menu Close Logic (extracted from your previous code) ---
+// This part was likely handled in your HTML with inline onclick or missing.
+// I'm adding it back explicitly here for completeness based on your provided HTML structure.
+if (mobileMenuCloseButton) {
+    mobileMenuCloseButton.addEventListener('click', () => {
+        if (mobileMenuOverlay) {
+            mobileMenuOverlay.classList.add('hidden');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+    });
+}
+
+if (mobileNavLinks) {
+    mobileNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (mobileMenuOverlay) {
+                mobileMenuOverlay.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        });
+    });
+}
+
+
+// Initial render of all graduands when the entire HTML document has been loaded and parsed.
 document.addEventListener('DOMContentLoaded', () => {
-    // Initial render of all graduands on page load
-    renderGraduands(graduandsData);
+    renderGraduands(graduandsData); // Display all graduands on page load
 
-    // Setup event listeners for graduand filtering and searching
-    // Check if elements exist before adding listeners
-    if (graduandSearch) {
-        graduandSearch.addEventListener('keyup', filterAndSearchGraduands); // 'keyup' for real-time search
-    }
-    if (graduandFilter) {
-        graduandFilter.addEventListener('change', filterAndSearchGraduands); // 'change' for new department selection
-    }
-
-    // Initialize speech dropdowns
+    // NEW: Initialize the speech dropdowns when the DOM is ready
     setupSpeechDropdowns();
 
-    // Initialize mobile menu
-    setupMobileMenu();
+    // The `toggleMobileMenu` function is already attached to `mobileMenuButton`
+    // and its close/link clicks are handled above.
+    // The previous `toggleAccordion` function remains commented out as it's not used by the new speech dropdowns.
 });
 
-// The `toggleAccordion` function is no longer needed as the speech dropdowns replace its functionality.
-// If you still have an FAQ section using this, you'll need to re-evaluate or update its HTML/CSS.
-// For now, I've commented it out as it doesn't align with the new speech dropdown structure.
+/**
+ * Toggles the visibility of the content within an FAQ accordion item.
+ * Changes the '+' icon to '-' when expanded, and vice-versa.
+ * @param {HTMLElement} element - The clicked `<h4>` header element of the FAQ accordion.
+ */
+// NOTE: This function is commented out because the new speech dropdowns
+// use a different mechanism. If you still have an FAQ section using this,
+// you will need to re-evaluate its implementation.
 /*
 function toggleAccordion(element) {
+    // Get the content paragraph which is the immediate sibling of the clicked header
     const content = element.nextElementSibling;
+    // Get the icon element (the last span within the header)
     const icon = element.querySelector('.faq-icon');
 
+    // Check if the content is currently hidden (based on the 'hidden' class)
     if (content.classList.contains('hidden')) {
+        // Show the content
         content.classList.remove('hidden');
-        content.classList.add('expanded');
-        icon.textContent = '-';
-        icon.classList.add('rotated');
+        content.classList.add('expanded'); // Add 'expanded' class to trigger CSS transition
+        icon.textContent = '-'; // Change icon from '+' to '-'
+        icon.classList.add('rotated'); // Add 'rotated' class for visual feedback
     } else {
-        content.classList.remove('expanded');
-        content.classList.add('hidden');
-        icon.textContent = '+';
-        icon.classList.remove('rotated');
+        // Hide the content
+        content.classList.remove('expanded'); // Remove 'expanded' to trigger CSS collapse
+        content.classList.add('hidden'); // Add 'hidden' after transition (or immediately)
+        icon.textContent = '+'; // Change icon from '-' to '+'
+        icon.classList.remove('rotated'); // Remove rotation
     }
 }
 */
