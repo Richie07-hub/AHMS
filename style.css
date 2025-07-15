@@ -367,43 +367,131 @@ body {
 }
 
 /* --- 5. About Ceremony Section --- */
+/* --- 5. About Ceremony Section --- */
 .about-section {
     background-color: var(--background-light);
-    padding: var(--spacing-3xl) var(--spacing-sm); /* Adjusted padding */
+    padding: var(--spacing-3xl) var(--spacing-sm);
     text-align: center;
 }
 
 .about-section .section-description {
-    font-size: var(--font-size-base); /* 1rem for main text */
+    font-size: var(--font-size-base);
     color: var(--text-medium);
-    margin: var(--spacing-xl) auto 0;
+    margin: var(--spacing-xl) auto var(--spacing-3xl); /* Increased bottom margin */
     max-width: 800px;
-    text-align: left; /* Ensure speech text aligns left */
+    text-align: left;
 }
 
-.about-section .section-description h3 {
-    font-size: var(--font-size-xl); /* 1.5rem for speech headings */
-    margin-top: var(--spacing-md);
-    margin-bottom: var(--spacing-sm);
+/* Speech Container Styling */
+.speech-container {
+    margin-bottom: var(--spacing-lg); /* Space between speech sections */
+    text-align: left; /* Ensure button and content are left-aligned */
+}
+
+.speech-toggle-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: var(--spacing-md) var(--spacing-lg); /* Generous padding for tap target */
+    background-color: var(--primary-blue);
+    color: var(--background-white);
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-size: var(--font-size-lg); /* Larger font for button text */
+    font-weight: var(--font-bold);
+    transition: background-color var(--transition-speed) var(--transition-timing),
+                transform var(--transition-speed) var(--transition-timing);
+    box-shadow: var(--shadow-sm);
+}
+
+.speech-toggle-button:hover {
+    background-color: var(--dark-blue);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.speech-toggle-button .button-text {
+    flex-grow: 1; /* Allows text to take available space */
+}
+
+.speech-toggle-button .arrow-icon {
+    width: 1.5rem; /* Icon size */
+    height: 1.5rem;
+    margin-left: var(--spacing-sm);
+    fill: currentColor; /* Inherit color from button text */
+    transition: transform var(--transition-speed) var(--transition-timing);
+}
+
+/* Rotate arrow when expanded */
+.speech-toggle-button[aria-expanded="true"] .arrow-icon {
+    transform: rotate(180deg);
+}
+
+/* Speech Content Wrapper */
+.speech-content-wrapper {
+    max-height: 0; /* Hidden by default with no height */
+    overflow: hidden; /* Hide overflowing content */
+    transition: max-height var(--transition-speed) var(--transition-timing),
+                padding var(--transition-speed) var(--transition-timing);
+    background-color: var(--background-white);
+    border-bottom-left-radius: var(--radius-md);
+    border-bottom-right-radius: var(--radius-md);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05); /* Subtle shadow below content */
+    border: 1px solid var(--border-medium); /* Add border to match cards */
+    border-top: none; /* No top border, connects to button visually */
+    opacity: 0; /* Start invisible */
+    transform: translateY(-10px); /* Slightly off-set for slide-in effect */
+    transition: max-height 0.5s ease-out, opacity 0.4s ease-out, transform 0.4s ease-out; /* Slower max-height transition */
+}
+
+/* When content is NOT hidden (i.e., expanded) */
+.speech-content-wrapper:not(.hidden) {
+    max-height: 500px; /* Adjust as needed, ensure it's greater than content height */
+    padding: var(--spacing-lg) var(--spacing-md); /* Add padding when visible */
+    opacity: 1; /* Fully visible */
+    transform: translateY(0); /* Slide into place */
+}
+
+.speech-inner-content {
+    /* Styles for the actual text inside */
+}
+
+.speech-inner-content h3 {
+    font-size: var(--font-size-xl);
+    margin-top: 0; /* Remove default top margin */
+    margin-bottom: var(--spacing-md);
     color: var(--dark-blue);
 }
 
-.about-section .section-description p {
-    margin-bottom: var(--spacing-sm);
+.speech-inner-content p {
+    font-size: var(--font-size-base);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.6;
+    color: var(--text-medium);
 }
 
-.about-section .section-description hr {
+.speech-inner-content p:last-child {
+    margin-bottom: 0;
+}
+
+
+.speech-separator {
     border: none;
-    border-top: 1px dashed var(--border-light);
-    margin: var(--spacing-lg) 0;
+    border-top: 2px dashed var(--border-light); /* Stronger dashed line */
+    margin: var(--spacing-xl) auto; /* Adjusted spacing */
+    width: 80%; /* Shorter line */
+    max-width: 300px; /* Max width for separator */
 }
 
+/* The rest of your about section styles */
 .principal-message {
     margin-top: var(--spacing-xl);
 }
 
 .principal-photo {
-    width: 120px; /* Slightly smaller on mobile */
+    width: 120px;
     height: 120px;
     border-radius: var(--radius-full);
     object-fit: cover;
@@ -413,11 +501,35 @@ body {
 
 .principal-quote {
     font-weight: var(--font-semibold);
-    font-size: var(--font-size-sm); /* 0.875rem for quote */
+    font-size: var(--font-size-sm);
     color: var(--text-medium);
     margin-top: 0;
 }
 
+/* Adjustments for desktop (min-width: 768px) */
+@media (min-width: 768px) {
+    .about-section .section-description {
+        margin-bottom: var(--spacing-4xl); /* More space on desktop */
+    }
+
+    .speech-toggle-button {
+        font-size: var(--font-size-xl); /* Larger button text on desktop */
+        padding: var(--spacing-md) var(--spacing-lg);
+    }
+
+    .speech-toggle-button .arrow-icon {
+        width: 1.75rem; /* Larger icon on desktop */
+        height: 1.75rem;
+    }
+
+    .speech-inner-content h3 {
+        font-size: var(--font-size-2xl); /* Larger heading on desktop */
+    }
+
+    .speech-inner-content p {
+        font-size: var(--font-size-md); /* Larger paragraph text on desktop */
+    }
+}
 /* --- 6. Graduands Section --- */
 .graduands-section {
     background-color: var(--background-white);
