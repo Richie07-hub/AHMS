@@ -1,7 +1,7 @@
 // ====================================================================
-// JAVASCRIPT FOR GRADUATION WEBSITE INTERACTIVITY
+// JAVASCRIPT FOR ACADEMY HALL MONTESSORI GRADUATION WEBSITE INTERACTIVITY
 // This script handles interactive elements like graduand search/filter,
-// FAQ accordion, and mobile menu toggling.
+// speech dropdowns, and mobile menu toggling.
 // ====================================================================
 
 // Array containing sample data for graduands.
@@ -23,36 +23,43 @@ const graduandsData = [
     { id: 13, name: "OKOLO Paul Ojotule", department: "Grade 5", photo: "images/DSC_0391.jpg" },
     { id: 14, name: "RONIK Precious Enifoma", department: "Grade 5", photo: "images/DSC_0378.jpg" },
     { id: 15, name: "SAMUEL Bukola Mercy", department: "Grade 5", photo: "images/DSC_0383.jpg" },
-    { id: 16, name: "ADEDAPO Adeoluwa Samuel", department: "Nursery 2 ", photo: "images/DSC_" },
+    { id: 16, name: "ADEDAPO Adeoluwa Samuel", department: "Nursery 2", photo: "images/DSC_" },
     { id: 17, name: "ADEMEFUN Famous Oluwaseyi", department: "Nursery 2", photo: "images/DSC_" },
     { id: 18, name: "AGBODO Etonam Oluwataramidara", department: "Nursery 2", photo: "images/DSC_" },
     { id: 19, name: "AKOSILE Hamat", department: "Nursery 2", photo: "images/DSC_" },
     { id: 20, name: "BAMIDELE Taiwo Hannah", department: "Nursery 2", photo: "images/DSC_" },
-    { id: 21, name: "BAMIDELE Kehinde Elizabeth", department: "Nursery 2", photo: "images/DSC_" }, 
-    { id: 22, name: "GREG-IYOHA Othniel Aigbode", department: "Nursery 2", photo: "images/DSC_" }, 
+    { id: 21, name: "BAMIDELE Kehinde Elizabeth", department: "Nursery 2", photo: "images/DSC_" },
+    { id: 22, name: "GREG-IYOHA Othniel Aigbode", department: "Nursery 2", photo: "images/DSC_" },
     { id: 23, name: "ISHAKA Amida", department: "Nursery 2", photo: "images/DSC_" },
     { id: 24, name: "OGUNNIRAN Toluwalase Joshep", department: "Nursery 2", photo: "images/DSC_" },
     { id: 25, name: "RONIK Dominion", department: "Nursery 2", photo: "images/DSC_" },
-    { id: 25, name: "ADAH David Okeogen", department: "KG 2", photo: "images/DSC_" },
-    { id: 26, name: "ADEDAPO Adedayo Abraham", department: "KG 2", photo: "images/DSC_" },
-    { id: 27, name: "ADEPOJU Adams Ayomide", department: "KG 2", photo: "images/DSC_" },
-    { id: 28, name: "ADEYEMI Daniel Ronaldo", department: "KG 2", photo: "images/DSC_" },
-    { id: 29, name: "ALAKE Oluwajomiloju Olalekan", department: "KG 2", photo: "images/DSC_" },
-    { id: 30, name: "ALAMU Bethel Oreofejesu", department: "KG 2", photo: "images/DSC_" },
-    { id: 31, name: "EHINMISAN Morenikeji Christa", department: "KG 2", photo: "images/DSC_" },
-    { id: 32, name: "GODWIN Chukwuemeka King", department: "KG 2", photo: "images/DSC_" },
-    { id: 33, name: "GREG-IYOHA Daniel Ehizokhae", department: "KG 2", photo: "images/DSC_" },
-    { id: 34, name: "JESSE Divine Sunday", department: "KG 2", photo: "images/DSC_" },
-    { id: 35, name: "MADUEKE Chrstabel Amanda", department: "KG 2", photo: "images/DSC_" },
+    { id: 26, name: "ADAH David Okeogen", department: "KG 2", photo: "images/DSC_" },
+    { id: 27, name: "ADEDAPO Adedayo Abraham", department: "KG 2", photo: "images/DSC_" },
+    { id: 28, name: "ADEPOJU Adams Ayomide", department: "KG 2", photo: "images/DSC_" },
+    { id: 29, name: "ADEYEMI Daniel Ronaldo", department: "KG 2", photo: "images/DSC_" },
+    { id: 30, name: "ALAKE Oluwajomiloju Olalekan", department: "KG 2", photo: "images/DSC_" },
+    { id: 31, name: "ALAMU Bethel Oreofejesu", department: "KG 2", photo: "images/DSC_" },
+    { id: 32, name: "EHINMISAN Morenikeji Christa", department: "KG 2", photo: "images/DSC_" },
+    { id: 33, name: "GODWIN Chukwuemeka King", department: "KG 2", photo: "images/DSC_" },
+    { id: 34, name: "GREG-IYOHA Daniel Ehizokhae", department: "KG 2", photo: "images/DSC_" },
+    { id: 35, name: "JESSE Divine Sunday", department: "KG 2", photo: "images/DSC_" },
+    { id: 36, name: "MADUEKE Chrstabel Amanda", department: "KG 2", photo: "images/DSC_" },
 ];
 
 // Get references to DOM elements used in JavaScript interactions
 const graduandsList = document.getElementById('graduands-list'); // Container for graduand cards
 const graduandSearch = document.getElementById('graduand-search'); // Input field for searching by name
 const graduandFilter = document.getElementById('graduand-filter'); // Dropdown for filtering by department
-const noGraduandsFound = document.getElementById('no-graduands-found'); // Message for no matching graduands
+
+// Get references for mobile menu
 const mobileMenuButton = document.getElementById('mobile-menu-button'); // Hamburger icon for mobile menu
-const mobileMenu = document.getElementById('mobile-menu'); // The mobile menu overlay itself
+const mobileMenuOverlay = document.getElementById('mobile-menu-overlay'); // The mobile menu overlay itself
+const mobileMenuCloseButton = document.getElementById('mobile-menu-close-button'); // Close button in mobile menu
+const mobileNavLinks = document.querySelectorAll('.nav-link-mobile'); // Links inside the mobile menu
+
+// Get reference for no graduands message
+const noGraduandsFound = document.getElementById('no-graduands-found'); // Message for no matching graduands
+
 
 /**
  * Renders the list of graduand cards into the DOM.
@@ -106,49 +113,106 @@ function filterAndSearchGraduands() {
     renderGraduands(filteredGraduands); // Render the filtered list of graduands
 }
 
-// Add event listeners to trigger filtering and searching whenever input changes
-graduandSearch.addEventListener('keyup', filterAndSearchGraduands); // 'keyup' for real-time search as user types
-graduandFilter.addEventListener('change', filterAndSearchGraduands); // 'change' for when a new department is selected
 
-// Initial render of all graduands when the entire HTML document has been loaded and parsed.
-document.addEventListener('DOMContentLoaded', () => {
-    renderGraduands(graduandsData); // Display all graduands on page load
-});
-
+// --- SPEECH DROPDOWN FUNCTIONALITY ---
 /**
- * Toggles the visibility of the content within an FAQ accordion item.
- * Changes the '+' icon to '-' when expanded, and vice-versa.
- * @param {HTMLElement} element - The clicked `<h4>` header element of the FAQ accordion.
+ * Initializes the speech dropdown toggles.
+ * Attaches click listeners to all buttons with the 'speech-toggle-button' class.
  */
-function toggleAccordion(element) {
-    // Get the content paragraph which is the immediate sibling of the clicked header
-    const content = element.nextElementSibling;
-    // Get the icon element (the last span within the header)
-    const icon = element.querySelector('.faq-icon');
+function setupSpeechDropdowns() {
+    const toggleButtons = document.querySelectorAll('.speech-toggle-button');
 
-    // Check if the content is currently hidden (based on the 'hidden' class)
-    if (content.classList.contains('hidden')) {
-        // Show the content
-        content.classList.remove('hidden');
-        content.classList.add('expanded'); // Add 'expanded' class to trigger CSS transition
-        icon.textContent = '-'; // Change icon from '+' to '-'
-        icon.classList.add('rotated'); // Add 'rotated' class for visual feedback
-    } else {
-        // Hide the content
-        content.classList.remove('expanded'); // Remove 'expanded' to trigger CSS collapse
-        content.classList.add('hidden'); // Add 'hidden' after transition (or immediately)
-        icon.textContent = '+'; // Change icon from '-' to '+'
-        icon.classList.remove('rotated'); // Remove rotation
+    toggleButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const targetId = button.getAttribute('aria-controls');
+            const targetContent = document.getElementById(targetId);
+
+            // Toggle the 'hidden' class on the content wrapper
+            targetContent.classList.toggle('hidden');
+
+            // Update accessibility attributes
+            const isExpanded = !targetContent.classList.contains('hidden');
+            button.setAttribute('aria-expanded', isExpanded);
+            targetContent.setAttribute('aria-hidden', !isExpanded);
+
+            // Optional: Scroll to the button if content expands below viewport
+            if (isExpanded) {
+                setTimeout(() => {
+                    // Use a more precise scroll behavior
+                    button.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 500); // Wait for the animation to start
+            }
+        });
+    });
+}
+
+// --- MOBILE MENU FUNCTIONALITY ---
+/**
+ * Initializes the mobile menu toggle functionality.
+ */
+function setupMobileMenu() {
+    if (mobileMenuButton && mobileMenuOverlay && mobileMenuCloseButton) {
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenuOverlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+        });
+
+        mobileMenuCloseButton.addEventListener('click', () => {
+            mobileMenuOverlay.classList.add('hidden');
+            document.body.style.overflow = ''; // Restore scrolling
+        });
+
+        // Close mobile menu when a link is clicked
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuOverlay.classList.add('hidden');
+                document.body.style.overflow = '';
+            });
+        });
     }
 }
 
-/**
- * Toggles the visibility of the mobile navigation menu.
- * This function is called when the hamburger icon or the close button in the mobile menu is clicked.
- */
-function toggleMobileMenu() {
-    mobileMenu.classList.toggle('hidden'); // Add or remove the 'hidden' class to toggle display
-}
 
-// Add event listener for the mobile menu button (hamburger icon)
-mobileMenuButton.addEventListener('click', toggleMobileMenu);
+// --- INITIALIZATION ---
+// Event listener for when the entire HTML document has been loaded and parsed.
+document.addEventListener('DOMContentLoaded', () => {
+    // Initial render of all graduands on page load
+    renderGraduands(graduandsData);
+
+    // Setup event listeners for graduand filtering and searching
+    // Check if elements exist before adding listeners
+    if (graduandSearch) {
+        graduandSearch.addEventListener('keyup', filterAndSearchGraduands); // 'keyup' for real-time search
+    }
+    if (graduandFilter) {
+        graduandFilter.addEventListener('change', filterAndSearchGraduands); // 'change' for new department selection
+    }
+
+    // Initialize speech dropdowns
+    setupSpeechDropdowns();
+
+    // Initialize mobile menu
+    setupMobileMenu();
+});
+
+// The `toggleAccordion` function is no longer needed as the speech dropdowns replace its functionality.
+// If you still have an FAQ section using this, you'll need to re-evaluate or update its HTML/CSS.
+// For now, I've commented it out as it doesn't align with the new speech dropdown structure.
+/*
+function toggleAccordion(element) {
+    const content = element.nextElementSibling;
+    const icon = element.querySelector('.faq-icon');
+
+    if (content.classList.contains('hidden')) {
+        content.classList.remove('hidden');
+        content.classList.add('expanded');
+        icon.textContent = '-';
+        icon.classList.add('rotated');
+    } else {
+        content.classList.remove('expanded');
+        content.classList.add('hidden');
+        icon.textContent = '+';
+        icon.classList.remove('rotated');
+    }
+}
+*/
