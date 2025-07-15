@@ -79,42 +79,55 @@
         </section>
 
         <section id="about" class="about-section">
-            <div class="container text-center max-w-4xl">
-                <h2 class="section-title text-blue">PROPRIETOR’S SPEECH</h2>
-                <div class="section-description text-left">
-                    <p>At the 11th End-of-Session, Speech, and Prize-Giving Ceremony<br>Academy Hall Montessori School</p>
+    <div class="container text-center max-w-4xl">
+        <h2 class="section-title text-blue">PROPRIETOR’S SPEECH</h2>
 
-                    <hr>
+        <!-- Toggle Button -->
+        <button onclick="toggleSpeech()" class="button button-blue" style="margin: 1rem auto; display: block;">
+            Toggle Speech
+        </button>
 
-                    <h3>1. Welcome Address</h3>
-                    <p>Distinguished parents, esteemed guests, dedicated teachers, proud graduands, and dear pupils,</p>
-                    <p>Good morning and a warm welcome to our 11th End-of-Session, Speech, and Prize-Giving Ceremony. On behalf of the management and staff of Academy Hall Montessori School, I express our heartfelt appreciation to every one of you for honoring our invitation today. Your presence means so much to us and reflects your continued support and belief in what we do.</p>
+        <!-- Toggle-able Content Starts -->
+        <div id="proprietor-speech-content" style="display: none;">
 
-                    <hr>
+            <div class="section-description text-left">
+                <p>At the 11th End-of-Session, Speech, and Prize-Giving Ceremony<br>Academy Hall Montessori School</p>
 
-                    <h3>2. Importance of the Event</h3>
-                    <p>Today’s event is not just a formality—it is a celebration of excellence, growth, and achievement. It marks the successful completion of another academic session and gives us the opportunity to recognize and reward hard work, discipline, and commitment among our pupils and staff.</p>
-                    <p>It also serves as a platform to celebrate our graduating pupils, reflect on our journey so far, and encourage others to aim higher. Most importantly, it strengthens the bond between home and school, reminding us all of our shared responsibility in shaping the future of our children.</p>
+                <hr>
 
-                    <h3>3. Advice to Graduands</h3>
-                    <p>To our beloved graduands—whether you're moving from Nursery 2, KG 2, or Basic 5—today marks a significant step in your academic journey. You have worked hard to reach this point, and we are very proud of each one of you.</p>
-                    <p>As you progress to the next level, I encourage you to stay focused, respectful, and disciplined. Keep learning, stay curious, and always remember the good values and lessons you’ve received here.</p>
-                    <p>To our Basic 5 graduands who will be leaving Academy Hall Montessori School for other schools, we celebrate you in a special way today. Though we will miss you, we are confident that the strong foundation you’ve received here will help you excel wherever you go. Represent us well, remain hardworking, and continue to make us proud.</p>
-                    <p>Never forget that greatness begins with small, consistent steps. Believe in yourself, dream big, and always carry the spirit of Academy Hall Montessori School with pride and confidence.</p>
+                <h3>1. Welcome Address</h3>
+                <p>Distinguished parents, esteemed guests, dedicated teachers, proud graduands, and dear pupils,</p>
+                <p>Good morning and a warm welcome to our 11th End-of-Session, Speech, and Prize-Giving Ceremony. On behalf of the management and staff of Academy Hall Montessori School, I express our heartfelt appreciation to every one of you for honoring our invitation today. Your presence means so much to us and reflects your continued support and belief in what we do.</p>
 
-                    <h3>4. Conclusion</h3>
-                    <p>In conclusion, I thank our incredible staff for their dedication, our supportive parents for their trust, and our pupils for making us proud. As we prepare for a new academic session, let us continue working together to ensure our children receive the best possible education.</p>
-                    <p>Congratulations once again to all our graduands and award recipients. May today’s celebration be a reminder that hard work and excellence never go unnoticed.</p>
-                    <p>Thank you, and God bless you all.</p>
-                </div>
-                <div class="principal-message">
-                    <img src="https://placehold.co/150x150/60A5FA/FFFFFF?text=Principal" alt="Principal's Photo" class="principal-photo">
-                    <p class="principal-quote">
-                        — Adepitan Adebola, Principal, Academy Hall Montessori School
-                    </p>
-                </div>
-            </div>
-        </section>
+                <hr>
+
+                <h3>2. Importance of the Event</h3>
+                <p>Today’s event is not just a formality—it is a celebration of excellence, growth, and achievement. It marks the successful completion of another academic session and gives us the opportunity to recognize and reward hard work, discipline, and commitment among our pupils and staff.</p>
+                <p>It also serves as a platform to celebrate our graduating pupils, reflect on our journey so far, and encourage others to aim higher. Most importantly, it strengthens the bond between home and school, reminding us all of our shared responsibility in shaping the future of our children.</p>
+
+                <h3>3. Advice to Graduands</h3>
+                <p>To our beloved graduands—whether you're moving from Nursery 2, KG 2, or Basic 5—today marks a significant step in your academic journey. You have worked hard to reach this point, and we are very proud of each one of you.</p>
+                <p>As you progress to the next level, I encourage you to stay focused, respectful, and disciplined. Keep learning, stay curious, and always remember the good values and lessons you’ve received here.</p>
+                <p>To our Basic 5 graduands who will be leaving Academy Hall Montessori School for other schools, we celebrate you in a special way today. Though we will miss you, we are confident that the strong foundation you’ve received here will help you excel wherever you go. Represent us well, remain hardworking, and continue to make us proud.</p>
+                <p>Never forget that greatness begins with small, consistent steps. Believe in yourself, dream big, and always carry the spirit of Academy Hall Montessori School with pride and confidence.</p>
+
+                <h3>4. Conclusion</h3>
+                <p>In conclusion, I thank our incredible staff for their dedication, our supportive parents for their trust, and our pupils for making us proud. As we prepare for a new academic session, let us continue working together to ensure our children receive the best possible education.</p>
+                <p>Congratulations once again to all our graduands and award recipients. May today’s celebration be a reminder that hard work and excellence never go unnoticed.</p>
+                <p>Thank you, and God bless you all.</p>
+            </div> <!-- end .section-description -->
+
+        </div> <!-- end #proprietor-speech-content -->
+
+        <div class="principal-message">
+            <img src="https://placehold.co/150x150/60A5FA/FFFFFF?text=Principal" alt="Principal's Photo" class="principal-photo">
+            <p class="principal-quote">
+                — Adepitan Adebola, Principal, Academy Hall Montessori School
+            </p>
+        </div>
+    </div>
+</section>
+
 
         <section id="graduands" class="graduands-section">
             <div class="container">
@@ -238,5 +251,12 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+function toggleSpeech() {
+    const content = document.getElementById("proprietor-speech-content");
+    content.style.display = content.style.display === "none" ? "block" : "none";
+}
+</script>
+
 </body>
 </html>
