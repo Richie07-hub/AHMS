@@ -199,6 +199,8 @@ body {
 }
 
 .navbar-brand {
+    display: flex; /* Add this */
+    align-items: center; /* Center logo + text vertically */
     font-size: var(--font-size-xl); /* 1.5rem for mobile brand */
     font-weight: var(--font-extrabold);
     color: var(--primary-blue);
