@@ -778,3 +778,11 @@ body {
 .social-icon:hover {
     color: var(--primary-blue);
 }
+
+
+.logo {
+    height: 40px; /* Adjust as needed */
+    width: auto;
+    vertical-align: middle;
+    margin-right: 10px;
+}
