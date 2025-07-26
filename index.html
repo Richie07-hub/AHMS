@@ -428,8 +428,10 @@ function toggleProprietorSpeech() {
 }
        function toggleHymn() {
     const hymn = document.getElementById("hymn");
+    if (hymn) {
     hymn.style.display = hymn.style.display === "none" ? "block" : "none";
 }
+       }
         // Mobile menu toggle logic
 function toggleMobileMenu() {
     const menu = document.getElementById('mobile-menu');
