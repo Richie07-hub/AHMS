@@ -89,7 +89,7 @@
         </button>
 
         <!-- Toggle-able Content Starts -->
-        <div id="proprietor-speech-content" style="display: none;">
+        <div id="hymn" style="display: none;">
             <div class="section-description text-left">
    🎓 <strong>Graduation Processional Hymn</strong><br>
 🎶 <em>To God Be the Glory</em><br><br>
@@ -425,6 +425,10 @@ Thank you, and God bless you all.
     <script>
 function toggleSpeech() {
     const content = document.getElementById("proprietor-speech-content");
+    content.style.display = content.style.display === "none" ? "block" : "none";
+}
+        function toggleSpeech() {
+    const content = document.getElementById("hymn");
     content.style.display = content.style.display === "none" ? "block" : "none";
 }
         // Mobile menu toggle logic
