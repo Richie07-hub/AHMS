@@ -84,7 +84,7 @@
         <h2 class="section-title text-blue">Processional Hymn</h2>
 
         <!-- Toggle Button -->
-        <button onclick="toggleSpeech()" class="button button-blue" style="margin: 1rem auto; display: block;">
+        <button onclick="toggleHymn()" class="button button-blue">
            To God Be the Glory
         </button>
 
@@ -124,15 +124,14 @@ With hearts full of hope for the journey ahead,<br>
 We’ll walk in His purpose, by His Spirit led.
 </p>
 
-    </div>
-</section>
+    </div></section>
 
              <section id="about" class="about-section">
     <div class="container text-center max-w-4xl">
         <h2 class="section-title text-blue">PROPRIETOR’S SPEECH</h2>
 
         <!-- Toggle Button -->
-        <button onclick="toggleSpeech()" class="button button-blue" style="margin: 1rem auto; display: block;">
+       <button onclick="toggleProprietorSpeech()" class="button button-blue">
            PROPRIETOR’S SPEECH
         </button>
 
@@ -427,7 +426,7 @@ function toggleSpeech() {
     const content = document.getElementById("proprietor-speech-content");
     content.style.display = content.style.display === "none" ? "block" : "none";
 }
-        function toggleSpeech() {
+        function togglehymn() {
     const content = document.getElementById("hymn");
     content.style.display = content.style.display === "none" ? "block" : "none";
 }
